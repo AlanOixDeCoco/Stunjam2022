@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int maxBirdPoop;
 
     public Dictionary<int, int> playersIDs = new Dictionary<int, int>();
+    public Color[] playerColors;
     private int playersCount = 0;
  
     private int birdPoopsCount = 0, deadInsectsCount = 0;

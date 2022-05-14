@@ -132,11 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 4000
-  moveSpeed: 10
-  normalDrag: 0.15
-  sloppyDrag: 0.1
   dashForce: 1500
-  isSloppy: 0
 --- !u!114 &2846501252361252682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +218,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: fe04207b95727b14e9505b5d829ba9eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
