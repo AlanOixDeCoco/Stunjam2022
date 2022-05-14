@@ -351,6 +351,135 @@ Transform:
   m_Father: {fileID: 1049875388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &675837128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675837129}
+  - component: {fileID: 675837130}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &675837129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675837128}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &675837130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675837128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbae6d431154b484c86a242b58591e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentController: {fileID: 1049875389}
+  maxDeadInsects: 5
+  spawnTimerMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.00000056282414
+      outSlope: 0.00000056282414
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.6354167
+    - serializedVersion: 3
+      time: 2
+      value: 4
+      inSlope: 2.75
+      outSlope: 2.75
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 8
+      inSlope: 6
+      outSlope: 6
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 4
+      value: 16
+      inSlope: 12
+      outSlope: 12
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5
+      value: 32
+      inSlope: 16
+      outSlope: 16
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxBirdPoop: 0
+--- !u!1 &948871736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 948871737}
+  m_Layer: 0
+  m_Name: DeadInsects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &948871737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948871736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1049875388}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1049875387
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1049875388}
+  - component: {fileID: 1049875389}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -382,9 +512,34 @@ Transform:
   - {fileID: 619394802}
   - {fileID: 1640182419}
   - {fileID: 519420032}
+  - {fileID: 1408561064}
+  - {fileID: 948871737}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1049875389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049875387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd0a225e7205e44f8648e29e9f150d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftSpawnLimit: -10
+  rightSpawnLimit: 10
+  topSpawnLimit: -4
+  bottomSpawnLimit: 4
+  birdPoopsHandler: {fileID: 0}
+  birdPoopPrefabs: []
+  deadInsectsHandler: {fileID: 948871737}
+  deadInsectPrefabs:
+  - {fileID: 8201952961496646239, guid: 00c0f33f70211e94f8d87c44331abe1e, type: 3}
+  - {fileID: 2853549960211577360, guid: d52bfef42f0068b47a6bfb8cba580bc9, type: 3}
+  - {fileID: 4655125363541971677, guid: 1e1e25eb340ca2247a6928b4eb4d77b1, type: 3}
 --- !u!1 &1296063217
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +570,38 @@ Transform:
   m_Children:
   - {fileID: 1718699712}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1408561063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408561064}
+  m_Layer: 0
+  m_Name: BirdPoops
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1408561064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408561063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1049875388}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1640182417
 GameObject:
@@ -427,6 +613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1640182419}
   - component: {fileID: 1640182418}
+  - component: {fileID: 1640182420}
   m_Layer: 0
   m_Name: WindShield
   m_TagString: Untagged
@@ -501,6 +688,57 @@ Transform:
   m_Father: {fileID: 1049875388}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1640182420
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640182417}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 8.078761, y: 5.168635}
+  - {x: 9.256649, y: 5.24004}
+  - {x: 9.716239, y: 5.245059}
+  - {x: 9.971109, y: 5.0956955}
+  - {x: 10.401497, y: 4.6889176}
+  - {x: 10.574698, y: 4.1563044}
+  - {x: 11.426184, y: -0.030892968}
+  - {x: 11.986868, y: -2.7675772}
+  - {x: 11.99846, y: -3.4864013}
+  - {x: 11.84993, y: -3.826213}
+  - {x: 11.526841, y: -4.17175}
+  - {x: 11.258725, y: -4.301486}
+  - {x: 10.286326, y: -4.5480514}
+  - {x: 8.2109375, y: -4.9492855}
+  - {x: 6.9493937, y: -5.141799}
+  - {x: 2.0950365, y: -5.486807}
+  - {x: -2.061491, y: -5.475737}
+  - {x: -5.5326867, y: -5.259351}
+  - {x: -7.4805927, y: -5.0822816}
+  - {x: -11.155982, y: -4.344994}
+  - {x: -11.510753, y: -4.1607065}
+  - {x: -11.835655, y: -3.85754}
+  - {x: -11.991075, y: -3.482857}
+  - {x: -11.978542, y: -2.7118373}
+  - {x: -10.409531, y: 4.668717}
+  - {x: -9.914473, y: 5.135117}
+  - {x: -9.742628, y: 5.2198715}
+  - {x: -9.238475, y: 5.206342}
+  - {x: -3.1066387, y: 4.855403}
+  - {x: 3.2316246, y: 4.8376594}
+  - {x: 8.309739, y: 5.1865177}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1718699711
 GameObject:
   m_ObjectHideFlags: 0

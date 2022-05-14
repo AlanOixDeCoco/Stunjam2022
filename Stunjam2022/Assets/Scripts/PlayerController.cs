@@ -8,22 +8,13 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Speed")]
     [SerializeField] private float moveForce;
-    [SerializeField] private float moveSpeed;
-
-    [Header("Drag (higher is less sloppy)")]
-    [Range(.1f, .2f)]
-    [SerializeField] private float normalDrag;
-    [Range(.05f, .2f)]
-    [SerializeField] private float sloppyDrag;
 
     [Header("Dash")]
     [SerializeField] private float dashForce;
     private Rigidbody2D playerRb;
-    
     private Vector2 playerMovement;
-    [SerializeField] private bool isSloppy;
 
-    private void Awake() {
+    private void Start() {
         playerRb = GetComponent<Rigidbody2D>();
     }
 
