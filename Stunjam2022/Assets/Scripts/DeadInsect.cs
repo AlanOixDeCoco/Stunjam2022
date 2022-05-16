@@ -54,6 +54,7 @@ public class DeadInsect : MonoBehaviour
     }
 
     private void DeleteDeadInsect(){
+        GameManager.Instance.deadInsectsCount--;
         Destroy(gameObject);
     }
 }

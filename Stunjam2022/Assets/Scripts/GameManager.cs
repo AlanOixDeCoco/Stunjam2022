@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +16,11 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<int, int> playersIDs = new Dictionary<int, int>();
     public Color[] playerColors;
+    public Sprite[] playerSprites;
+    public TextMeshProUGUI[] playersScoreTexts;
     private int playersCount = 0;
  
-    private int birdPoopsCount = 0, deadInsectsCount = 0;
+    public int birdPoopsCount = 0, deadInsectsCount = 0;
     private bool isDeadInsectSpawning = false;
 
     public List<float> playersScores = new List<float>();
@@ -39,6 +43,9 @@ public class GameManager : MonoBehaviour
                 spawnTimerMultiplier.Evaluate(Mathf.Clamp(deadInsectsCount - 1, 0, deadInsectsCount)),
                 spawnTimerMultiplier.Evaluate(deadInsectsCount)
             );
+        }
+        for(int i=0; i<playersCount; i++){
+            playersScoreTexts[i].text = $"Player {i+1}: {((int)playersScores[i])}";
         }
     }
 

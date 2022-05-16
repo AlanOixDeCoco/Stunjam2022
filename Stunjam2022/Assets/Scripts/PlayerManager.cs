@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     private void Awake() {
         GameManager.Instance.AddPlayer(GetInstanceID());
+        GetComponentInChildren<SpriteRenderer>().sprite = GameManager.Instance.playerSprites[GameManager.Instance.playersIDs[GetInstanceID()] - 1];
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
