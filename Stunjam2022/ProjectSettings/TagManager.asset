@@ -39,6 +39,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Windshield
+    uniqueID: 666988861
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: FlyGrounded
+    uniqueID: 2197057655
+    locked: 0
+  - name: Wipers
+    uniqueID: 4091087293
+    locked: 0
+  - name: FlyJump
+    uniqueID: 3200643897
     locked: 0
