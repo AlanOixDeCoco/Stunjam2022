@@ -13,6 +13,9 @@ public class DeadInsect : MonoBehaviour
     public TextMeshProUGUI rewardStateText;
     public Image captureStateImage;
     public Image captureOwnerImage;
+    public UnityEngine.U2D.Animation.SpriteLibrary sl;
+    public Animator animator;
+    public GameObject[] maggots;
 
     [HideInInspector]
     public int owningPlayerID = 0;
@@ -25,15 +28,17 @@ public class DeadInsect : MonoBehaviour
 
     private void Start() {
         canvasTransform.rotation = Quaternion.identity;
+        maggots = new GameObject[5];
     }
 
     private void Update() {
         rewardStateText.text = $"{(int)reward} pts";
 
         if(owningPlayerID != 0){
-            Debug.Log($"Player {GameManager.Instance.playersIDs[owningPlayerID]} is the owner ({GetInstanceID()})!");
+            //Debug.Log($"Player {GameManager.Instance.playersIDs[owningPlayerID]} is the owner ({GetInstanceID()})!");
             captureOwnerImage.color = GameManager.Instance.playerColors[GameManager.Instance.playersIDs[owningPlayerID] - 1];
-            captureOwnerImage.fillAmount = 1;
+            //sl.spriteLibraryAsset = GameManager.Instance.playerSpriteLibraries[GameManager.Instance.playersIDs[owningPlayerID] - 1];
+            captureOwnerImage.fillAmount = 0;
             reward -= Time.deltaTime;
             GameManager.Instance.playersScores[GameManager.Instance.playersIDs[owningPlayerID] - 1] += Time.deltaTime;
         }

@@ -105,6 +105,8 @@ MonoBehaviour:
   rewardStateText: {fileID: 3028968815168956104}
   captureStateImage: {fileID: 4928433805377552578}
   captureOwnerImage: {fileID: 1189488621568969279}
+  sl: {fileID: 0}
+  animator: {fileID: 0}
   owningPlayerID: 0
   capturingPlayerID: 0
   playersTriggered: 0

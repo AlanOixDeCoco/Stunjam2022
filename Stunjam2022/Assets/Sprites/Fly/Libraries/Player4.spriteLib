@@ -142,4 +142,31 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: 867422086, guid: edb594b3d4b440847bffb855e1b63581, type: 3}
     m_FromMain: 1
     m_EntryOverrideCount: 11
+  - m_Name: Wiggle
+    m_Hash: 731000755
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: grub_1_0
+      m_Hash: -774115598
+      m_Sprite: {fileID: 1625315850, guid: e4c1cc231aa2bd14bb280ac2ac95078f, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -522701750, guid: 3d98ae821c73fdc47a7c5588c9732218, type: 3}
+    - m_Name: grub_1_1
+      m_Hash: -1495474588
+      m_Sprite: {fileID: 1249740398, guid: e4c1cc231aa2bd14bb280ac2ac95078f, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -1145543546, guid: 3d98ae821c73fdc47a7c5588c9732218, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 2
+  - m_Name: Empty
+    m_Hash: -1459219776
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: -354373004
+      m_Sprite: {fileID: 0}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 0}
+    m_FromMain: 1
+    m_EntryOverrideCount: 0
   m_PrimaryLibraryGUID: 65dfbf8f48bdcc549b7b4411c6b3b870
