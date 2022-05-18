@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashForce;
     private Rigidbody2D playerRb;
     private SpriteRenderer spriteRenderer;
+    private AudioSource[] audioSource;
     private Vector2 playerMovement;
     private readonly float DASH_STUN = 1;
     private readonly float WIPER_STUN = 2;
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private void Start() {
         playerRb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponents<AudioSource>();
         state = states.IDLE;
     }
 
@@ -99,6 +101,7 @@ public class PlayerController : MonoBehaviour
 
         if(context.phase == InputActionPhase.Started && CanMove(state))
         {
+            audioSource[0].Play();
             dashCooldown = MAX_DASH_COOLDOWN;
             spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);
 
@@ -120,6 +123,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && state != states.JUMP && state != states.STUN)
         {
+            audioSource[1].Play();
             playerRb.velocity = Vector2.zero;
             hitbox.enabled = false;
             state = states.JUMP;
@@ -168,6 +172,11 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(direction);
         if (stunTime <= 0 || replace)
         {
+            if (stunTime <= 0)
+            {
+                audioSource[2].Play();
+                audioSource[3].Play();
+            }
             stunTime = duration;
         }
     }
@@ -175,7 +184,7 @@ public class PlayerController : MonoBehaviour
     public void OnStunFinished()
     {
         stunTime = 0;
-        state = states.IDLE;
+        SetIdleWalk();
         playerRb.drag = drag[(int)state];
     }
 
@@ -195,12 +204,14 @@ public class PlayerController : MonoBehaviour
                 if ((state == states.DASH || state == states.STUN) && otherPlayer.state != states.DASH)
                 {
                     otherPlayer.OnStun(playerRb.velocity * DASH_POWER, DASH_STUN);
+                    audioSource[4].Play();
                 }
             }
             else if (entity.name == "WiperSprite")
             {
                 Rigidbody2D wiperRb = entity.GetComponent<Rigidbody2D>();
                 OnStun(wiperRb.velocity * DASH_POWER, WIPER_STUN, true);
+                audioSource[4].Play();
             }
 
         }
@@ -208,6 +219,7 @@ public class PlayerController : MonoBehaviour
         if (state == states.STUN)
         {
             playerRb.AddForce(collision.contacts[0].normal * BOUNCE_POWER);
+            audioSource[4].Play();
         }
     }
 
