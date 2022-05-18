@@ -489,8 +489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613c1cb5b7aa41348b3a12c386db367f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  captureTime: 2
-  reward: 40
+  captureTime: 1
+  reward: 5
   canvasTransform: {fileID: 704913521580132505}
   rewardStateText: {fileID: 7226864369678957864}
   captureStateImage: {fileID: 4527612697045082298}

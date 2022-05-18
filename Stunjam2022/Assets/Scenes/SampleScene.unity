@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 238929444}
   - component: {fileID: 238929443}
   m_Layer: 3
-  m_Name: Static Sprite
+  m_Name: WiperSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2187,7 +2187,7 @@ GameObject:
   - component: {fileID: 1995457761}
   - component: {fileID: 1995457760}
   m_Layer: 3
-  m_Name: Static Sprite
+  m_Name: WiperSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

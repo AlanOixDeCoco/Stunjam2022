@@ -23,6 +23,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRb;
     private SpriteRenderer spriteRenderer;
     private Vector2 playerMovement;
+    private readonly float DASH_STUN = 1;
+    private readonly float WIPER_STUN = 2;
+    private readonly float MAX_DASH_COOLDOWN = 1.2f;
+    private readonly float DASH_POWER = 30;
+    private readonly float BOUNCE_POWER = 1000;
+
+    private readonly float[] drag = { 10, 10, 0.5f, 10, 0 };
+    private float dashCooldown = 0f;
+    private float stunTime = 0f;
     public states state;
     public Animator playerAnimator;
     public CapsuleCollider2D hitbox;
@@ -34,9 +43,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        playerRb.AddForce(moveForce * Time.fixedDeltaTime * playerMovement);
         playerAnimator.SetInteger("State", (int)state);
-        
+
         if (CanMove(state) && playerMovement.magnitude == 0.0)
         {
             state = states.IDLE;
@@ -44,35 +52,75 @@ public class PlayerController : MonoBehaviour
 
         if (state != states.STUN && state != states.JUMP)
         {
-            float angle = Mathf.Acos(playerRb.velocity.normalized.y) * -Mathf.Sign(playerRb.velocity.x);
-            playerRb.MoveRotation(angle * Mathf.Rad2Deg);
-            playerRb.angularVelocity = 0;
+            if (state != states.DASH)
+            {
+                playerRb.AddForce(moveForce * Time.fixedDeltaTime * playerMovement);
+            }
+            if (Mathf.Abs(playerRb.velocity.x) > 0.001 && Mathf.Abs(playerRb.velocity.y) > 0.001)
+            {
+                float angle = Mathf.Acos(playerRb.velocity.normalized.y) * -Mathf.Sign(playerRb.velocity.x);
+                playerRb.MoveRotation(angle * Mathf.Rad2Deg);
+                playerRb.angularVelocity = 0;
+            }
+        }
+
+        if (dashCooldown > 0)
+        {
+            dashCooldown -= Time.fixedDeltaTime;
+            if (dashCooldown <= 0)
+            {
+                OnDashReloaded();
+            }
+        }
+        
+        if (state == states.STUN)
+        {
+            stunTime -= Time.fixedDeltaTime;
+            if (stunTime <= 0)
+            {
+                OnStunFinished();
+            }
         }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        playerMovement = context.ReadValue<Vector2>();
         if (CanMove(state))
         {
-            playerMovement = context.ReadValue<Vector2>();
             state = states.WALK;
         }
     }
     public void OnDash(InputAction.CallbackContext context){
+        if (dashCooldown > 0)
+        {
+            return;
+        }
+
         if(context.phase == InputActionPhase.Started && CanMove(state))
         {
-            playerRb.AddForce(playerMovement.normalized * dashForce);
+            dashCooldown = MAX_DASH_COOLDOWN;
+            spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+
+            playerRb.velocity = Vector2.zero;
+            if (playerMovement.normalized.magnitude == 0f)
+            {
+                float rad = Mathf.Deg2Rad * playerRb.rotation;
+                playerRb.AddForce(new Vector2(-Mathf.Sin(rad), Mathf.Cos(rad)) * dashForce);
+            } else
+            {
+                playerRb.AddForce(playerMovement.normalized * dashForce);
+            }
+            playerRb.drag = drag[(int)state];
             state = states.DASH;
         }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && state != states.JUMP)
+        if (context.phase == InputActionPhase.Started && state != states.JUMP && state != states.STUN)
         {
             playerRb.velocity = Vector2.zero;
-            playerMovement = Vector2.zero;
-
             hitbox.enabled = false;
             state = states.JUMP;
             spriteRenderer.sortingLayerName = "FlyJump";
@@ -84,15 +132,83 @@ public class PlayerController : MonoBehaviour
         return p_state == states.IDLE || p_state == states.WALK;
     }
 
+    public void SetIdleWalk()
+    {
+        if (playerMovement.magnitude == 0.0)
+        {
+            state = states.IDLE;
+        }
+        else
+        {
+            state = states.WALK;
+        }
+    }
+
     public void OnDashFinished()
     {
         state = states.IDLE;
+        playerRb.drag = drag[(int)state];
+        SetIdleWalk();
     }
 
     public void OnJumpFinished()
     {
-        state = states.IDLE;
+        SetIdleWalk();
+    }
+    public void OnJumpVulnerable()
+    {
         hitbox.enabled = true;
         spriteRenderer.sortingLayerName = "FlyGrounded";
     }
+
+    public void OnStun(Vector2 direction, float duration, bool replace = false)
+    {
+        state = states.STUN;
+        playerRb.drag = drag[(int)state];
+        playerRb.AddForce(direction);
+        if (stunTime <= 0 || replace)
+        {
+            stunTime = duration;
+        }
+    }
+
+    public void OnStunFinished()
+    {
+        stunTime = 0;
+        state = states.IDLE;
+        playerRb.drag = drag[(int)state];
+    }
+
+    public void OnDashReloaded()
+    {
+        spriteRenderer.color = new Color(1, 1, 1);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Collider2D entity = collision.collider;
+        if (entity != null)
+        {
+            if (entity.name == "PlayerSprite")
+            {
+                PlayerController otherPlayer = entity.GetComponentInParent<PlayerController>();
+                if ((state == states.DASH || state == states.STUN) && otherPlayer.state != states.DASH)
+                {
+                    otherPlayer.OnStun(playerRb.velocity * DASH_POWER, DASH_STUN);
+                }
+            }
+            else if (entity.name == "WiperSprite")
+            {
+                Rigidbody2D wiperRb = entity.GetComponent<Rigidbody2D>();
+                OnStun(wiperRb.velocity * DASH_POWER, WIPER_STUN, true);
+            }
+
+        }
+
+        if (state == states.STUN)
+        {
+            playerRb.AddForce(collision.contacts[0].normal * BOUNCE_POWER);
+        }
+    }
+
 }
