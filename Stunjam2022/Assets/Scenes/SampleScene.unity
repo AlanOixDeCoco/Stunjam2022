@@ -866,11 +866,11 @@ MonoBehaviour:
   - {r: 0.23529412, g: 0.8862745, b: 0.7137255, a: 1}
   - {r: 0.5176471, g: 0.23529412, b: 0.8862745, a: 1}
   - {r: 0.8, g: 0.8862745, b: 0.23529412, a: 1}
-  playerSprites:
-  - {fileID: 21300000, guid: fe04207b95727b14e9505b5d829ba9eb, type: 3}
-  - {fileID: 21300000, guid: b4b5a1b98f1b68e4ba83cf2d5c8b593f, type: 3}
-  - {fileID: 21300000, guid: e81ad121c94f72f4483e6fbcd17a2803, type: 3}
-  - {fileID: 21300000, guid: cd609fa6f68d7134e8e879501af83c46, type: 3}
+  playerSpriteLibraries:
+  - {fileID: 7108339969198208228, guid: 65dfbf8f48bdcc549b7b4411c6b3b870, type: 3}
+  - {fileID: 7108339969198208228, guid: 9662b7a811ce7f245bfb7ea8328d3ce6, type: 3}
+  - {fileID: 7108339969198208228, guid: 531a8797396632540bc5e6dce4c7c768, type: 3}
+  - {fileID: 7108339969198208228, guid: f0ea72e6b27670b4283153acc3071d5a, type: 3}
   playersScoreTexts:
   - {fileID: 1795029462}
   - {fileID: 2132248967}

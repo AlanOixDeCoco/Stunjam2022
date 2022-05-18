@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
 public class PlayerManager : MonoBehaviour
 {
     private void Awake() {
         GameManager.Instance.AddPlayer(GetInstanceID());
-        GetComponentInChildren<SpriteRenderer>().sprite = GameManager.Instance.playerSprites[GameManager.Instance.playersIDs[GetInstanceID()] - 1];
+        GetComponentInChildren<SpriteLibrary>().spriteLibraryAsset = GameManager.Instance.playerSpriteLibraries[GameManager.Instance.playersIDs[GetInstanceID()] - 1];
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

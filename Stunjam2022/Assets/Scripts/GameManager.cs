@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<int, int> playersIDs = new Dictionary<int, int>();
     public Color[] playerColors;
-    public Sprite[] playerSprites;
+    public UnityEngine.U2D.Animation.SpriteLibraryAsset[] playerSpriteLibraries;
     public TextMeshProUGUI[] playersScoreTexts;
     private int playersCount = 0;
  
