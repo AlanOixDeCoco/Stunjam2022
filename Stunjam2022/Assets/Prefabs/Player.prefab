@@ -139,6 +139,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 57d27cd5-0848-4330-9680-411e0a7ffa83
     m_ActionName: Player/Jump[/XInputControllerWindows/buttonSouth,/DualShock4GamepadHID/buttonSouth,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1939476899406527090}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnReset
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 37cc2aaf-a96e-43c6-b3d2-23c3606fd8e3
+    m_ActionName: Player/Restart[/DualShock4GamepadHID/select,/DualShock4GamepadHID1/select,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
