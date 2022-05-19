@@ -99,7 +99,10 @@ public class GameManager : MonoBehaviour
         while(Time.time < endTime){
             yield return null;
         }
-        func.Invoke();
+        if (shouldDeadInsectSpawn)
+        {
+            func.Invoke();
+        }
         isDeadInsectSpawning = false;
     }
     #endregion =======
