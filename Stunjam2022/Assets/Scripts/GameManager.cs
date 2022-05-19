@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,10 +19,15 @@ public class GameManager : MonoBehaviour
     public Color[] playerColors;
     public UnityEngine.U2D.Animation.SpriteLibraryAsset[] playerSpriteLibraries;
     public TextMeshProUGUI[] playersScoreTexts;
+    public TextMeshProUGUI winningPlayerText;
+    public Animator wipersAnimator;
     private int playersCount = 0;
  
     public int birdPoopsCount = 0, deadInsectsCount = 0;
     private bool isDeadInsectSpawning = false;
+    private bool shouldDeadInsectSpawn = false;
+    private bool ended = false;
+    public GameObject instructionsText;
 
     public List<float> playersScores = new List<float>();
 
@@ -34,11 +40,27 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
-        SpawnDeadInsect(5, 5);
+
+    }
+
+    public void StartRound()
+    {
+        shouldDeadInsectSpawn = true;
+        PlayerInputManager.instance.DisableJoining();
+        instructionsText.SetActive(false);
+    }
+
+    public void EndRound()
+    {
+        environmentController.clearDeadInsects();
+        shouldDeadInsectSpawn = false;
+        wipersAnimator.SetTrigger("End");
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
     }
 
     private void Update() {
-        if(!isDeadInsectSpawning && (deadInsectsCount < maxDeadInsects)){
+        if(!isDeadInsectSpawning && shouldDeadInsectSpawn && (deadInsectsCount < maxDeadInsects)){
             SpawnDeadInsect(
                 spawnTimerMultiplier.Evaluate(Mathf.Clamp(deadInsectsCount - 1, 0, deadInsectsCount)),
                 spawnTimerMultiplier.Evaluate(deadInsectsCount)
@@ -46,6 +68,13 @@ public class GameManager : MonoBehaviour
         }
         for(int i=0; i<playersCount; i++){
             playersScoreTexts[i].text = $"Player {i+1}: {((int)playersScores[i])}";
+            if (playersScores[i] >= 100 && !ended)
+            {
+                ended = true;
+                EndRound();
+                winningPlayerText.text = $"Player {i + 1} wins the game !";
+                winningPlayerText.color = playerColors[i];
+            }
         }
     }
 

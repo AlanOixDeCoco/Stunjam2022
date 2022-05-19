@@ -33,4 +33,12 @@ public class EnvironmentController : MonoBehaviour
         newDeadInsect.transform.Rotate(Vector3.forward, Random.Range(0, 360f));
         deadInsects.Add(newDeadInsect.GetComponent<DeadInsect>());
     }
+
+    public void clearDeadInsects()
+    {
+        foreach (DeadInsect insect in deadInsects)
+        {
+            insect.UnsetReward();
+        }
+    }
 }
